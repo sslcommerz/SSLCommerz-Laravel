@@ -14,7 +14,7 @@ In this example you will find below script and a mysql table creation file.
   
 
 ==Run the project==
-	1. First create your Sanbox store account from below url. After registration you will get two mail. One for Store_id and Store_password.
+	1. First create your Sanbox store account from below url. After registration you will get two mail. One for Store_id and Store_password. (Note: Use Sanbox Store_id & Store_password for only Local testing. It's not applicable for Production. For Production implementation, use live Store_id & Store_password)
 	   Another one for Report panel access.	
 	   https://developer.sslcommerz.com/registration/
 	2. Then give the store_id and store_password in SSLCommerz.php page. 
