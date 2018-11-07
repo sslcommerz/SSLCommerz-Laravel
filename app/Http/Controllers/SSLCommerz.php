@@ -256,7 +256,7 @@ class SSLCommerz
             curl_setopt($handle, CURLOPT_SSL_VERIFYHOST, false);
             curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, false);
         } else {
-            curl_setopt($handle, CURLOPT_SSL_VERIFYHOST, true);
+            curl_setopt($handle, CURLOPT_SSL_VERIFYHOST, 2); // Its default value is now 2
             curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, true);
         }
 
@@ -319,7 +319,7 @@ class SSLCommerz
                 } 
                 else 
                 {
-                    curl_setopt($handle, CURLOPT_SSL_VERIFYHOST, true);
+                    curl_setopt($handle, CURLOPT_SSL_VERIFYHOST, 2);// Its default value is now 2
                     curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, true);
                 }
 
