@@ -1,6 +1,6 @@
 === Plugin Name ===
 Contributors: C.M.Sayedur Rahman
-	      cmsayed@gmail.com
+	      sayed@sslwireless.com
 Tags: Payment Gateway, SSLCommerz, IPN, Laravel 5.6
 Requires : PHP 5.6 and Mysql
 License: GPLv2 or later
@@ -11,6 +11,7 @@ In this example you will find below script and a mysql table creation file.
   2. app\Http\Controllers\PublicSslCommerzPaymentController.php: All the functions to do the transaction. Read the comments carefully.
   3. app\Http\Controllers\SSLCommerz.php: Helping class, here you will input store information
   4. app\Http\Middleware\VerifyCsrfToken.php : Input Route names to accept call from out side your site
+  5. Sample_order_table.sql: This is a sample table to store order or transaction information.
   
 
 ==Run the project==
