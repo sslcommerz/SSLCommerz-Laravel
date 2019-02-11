@@ -34,15 +34,15 @@ class PublicSslCommerzPaymentController extends Controller
             $post_data['cancel_url'] = $server_name . "cancel";
 
             # CUSTOMER INFORMATION
-            $post_data['cus_name'] = 'NayemSayed';
-            $post_data['cus_email'] = 'cmsayed@gmail.com';
-            $post_data['cus_add1'] = '93 B Eskaton';
+            $post_data['cus_name'] = 'Customer Name';
+            $post_data['cus_email'] = 'customer@mail.com';
+            $post_data['cus_add1'] = 'Customer Address';
             $post_data['cus_add2'] = "";
             $post_data['cus_city'] = "";
             $post_data['cus_state'] = "";
             $post_data['cus_postcode'] = "";
             $post_data['cus_country'] = "Bangladesh";
-            $post_data['cus_phone'] = '8801913900620';
+            $post_data['cus_phone'] = '8801XXXXXXXXX';
             $post_data['cus_fax'] = "";
 
             # SHIPMENT INFORMATION
