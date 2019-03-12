@@ -415,9 +415,9 @@ class SSLCommerz
             $new_data = array();
             if (!empty($pre_define_key)) {
                 foreach ($pre_define_key as $value) {
-                    if (isset($post_data[$value])) {
+                 //   if (isset($post_data[$value])) {
                         $new_data[$value] = ($post_data[$value]);
-                    }
+                  //  }
                 }
             }
             # ADD MD5 OF STORE PASSWORD
