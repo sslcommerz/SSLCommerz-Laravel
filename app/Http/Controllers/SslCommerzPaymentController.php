@@ -5,24 +5,25 @@ namespace App\Http\Controllers;
 use DB;
 use Illuminate\Http\Request;
 use App\Library\SslCommerz\SslCommerzNotification;
+use Illuminate\Routing\Controller;
 
 class SslCommerzPaymentController extends Controller
 {
 
     public function exampleEasyCheckout()
     {
-        return view('exampleEasycheckout');
+        return view('example-easy-checkout');
     }
 
     public function exampleHostedCheckout()
     {
-        return view('exampleHosted');
+        return view('example-hosted');
     }
 
     public function index(Request $request)
     {
-        # Here you have to receive all the order data to initate the payment.
-        # Let's say, your oder transaction informations are saving in a table called "orders"
+        # Here you have to receive all the order data to initiate the payment.
+        # Let's say, your oder transaction information are saving in a table called "orders"
         # In "orders" table, order unique identity is "transaction_id". "status" field contain status of the transaction, "amount" is the order amount to be paid and "currency" is for storing Site Currency which will be checked with paid currency.
 
         $post_data = array();
