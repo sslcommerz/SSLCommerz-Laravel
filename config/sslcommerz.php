@@ -6,7 +6,9 @@ return [
     'projectPath' => env('PROJECT_PATH'), // its your web address. you can use you localhost also
     // For Sandbox, use "https://sandbox.sslcommerz.com"
     // For Live, use "https://securepay.sslcommerz.com"
-    'apiDomain' => env("API_DOMAIN_URL"),  // use any link from above
+  
+    'apiDomain' => env("API_DOMAIN_URL", "https://sandbox.sslcommerz.com"), // use any link from above
+
     'apiCredentials' => [
         'store_id' => env("STORE_ID"), // use store_id from given credentials
         'store_password' => env("STORE_PASSWORD"), // use store_password from given credentials

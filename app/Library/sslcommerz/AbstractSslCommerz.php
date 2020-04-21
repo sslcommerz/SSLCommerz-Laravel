@@ -94,8 +94,10 @@ abstract class AbstractSslCommerz implements SslCommerzInterface
         } else {
             if (isset($sslcz['GatewayPageURL']) && $sslcz['GatewayPageURL'] != "") {
                 // this is important to show the popup, return or echo to send json response back
+
                 if ($this->getApiUrl() != null && $this->getApiUrl() == $this->config['apiDomain']) {
                     $response = json_encode(['status' => 'SUCCESS', 'data' => $sslcz['GatewayPageURL'], 'logo' => $sslcz['storeLogo']]);
+
                 } else {
                     $response = json_encode(['status' => 'success', 'data' => $sslcz['GatewayPageURL'], 'logo' => $sslcz['storeLogo']]);
                 }
