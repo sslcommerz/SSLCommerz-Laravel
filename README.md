@@ -99,7 +99,7 @@ Now, let's go to the main integration part.
 * __Step 13:__ For redirecting action from SSLCommerz Payment gateway, we have also provided sample `success.php`, `cancel.php`, `fail.php`files. You can update those files according to your need.
 
 
-###Contributors:_
+### Contributors
 
 >Prabal Mallick
 
