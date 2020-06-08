@@ -1,10 +1,4 @@
-### SSLCommerz Payment Gateway Integration - PHP Library
-
->_Contributors:_
-
-Prabal Mallick
-
-prabal.mallick@sslwireless.com
+### SSLCommerz - Laravel Library
 
 __Tags:__ Payment Gateway, SSLCommerz, IPN
 
@@ -103,3 +97,12 @@ Now, let's go to the main integration part.
 * __Step 12:__ For Hosted Checkout integration, you can update the `checkout_hosted.php` or use a different file according to your need. We have provided a basic sample page from where you can kickstart the payment gateway integration.
 
 * __Step 13:__ For redirecting action from SSLCommerz Payment gateway, we have also provided sample `success.php`, `cancel.php`, `fail.php`files. You can update those files according to your need.
+
+
+###Contributors:_
+
+>Prabal Mallick
+
+> Md. Rakibul Islam
+
+> integration@sslcommerz.com
