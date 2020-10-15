@@ -12,7 +12,7 @@ __License:__ GPLv2 or later
 ```
  |-- config/
     |-- sslcommerz.php
- |-- app/Library/sslcommerz
+ |-- app/Library/SslCommerz
     |-- AbstractSslCommerz.php (core file)
     |-- SslCommerzInterface.php (core file)
     |-- SslCommerzNotification.php (core file)
