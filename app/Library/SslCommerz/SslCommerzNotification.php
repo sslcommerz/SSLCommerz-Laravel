@@ -22,7 +22,7 @@ class SslCommerzNotification extends AbstractSslCommerz
         $this->setStorePassword($this->config['apiCredentials']['store_password']);
     }
 
-    public function orderValidate($trx_id = '', $amount = 0, $currency = "BDT", $post_data)
+    public function orderValidate($post_data, $trx_id = '', $amount = 0, $currency = "BDT")
     {
         if ($post_data == '' && $trx_id == '' && !is_array($post_data)) {
             $this->error = "Please provide valid transaction ID and post request data";
