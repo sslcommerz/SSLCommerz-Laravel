@@ -175,7 +175,7 @@ class SslCommerzPaymentController extends Controller
             ->select('transaction_id', 'status', 'currency', 'amount')->first();
 
         if ($order_detials->status == 'Pending') {
-            $validation = $sslc->orderValidate($tran_id, $amount, $currency, $request->all());
+            $validation = $sslc->orderValidate($request->all(), $tran_id, $amount, $currency);
 
             if ($validation == TRUE) {
                 /*
@@ -269,7 +269,7 @@ class SslCommerzPaymentController extends Controller
 
             if ($order_details->status == 'Pending') {
                 $sslc = new SslCommerzNotification();
-                $validation = $sslc->orderValidate($tran_id, $order_details->amount, $order_details->currency, $request->all());
+                $validation = $sslc->orderValidate($request->all(), $tran_id, $order_details->amount, $order_details->currency);
                 if ($validation == TRUE) {
                     /*
                     That means IPN worked. Here you need to update order status
