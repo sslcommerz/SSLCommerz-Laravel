@@ -49,7 +49,7 @@ class SslCommerzNotification extends AbstractSslCommerz
             $post_data['store_id'] = $this->getStoreId();
             $post_data['store_pass'] = $this->getStorePassword();
 
-            if ($this->SSLCOMMERZ_hash_varify($this->getStorePassword(), $post_data)) {
+            if ($this->SSLCOMMERZ_hash_verify($post_data, $this->getStorePassword())) {
 
                 $val_id = urlencode($post_data['val_id']);
                 $store_id = urlencode($this->getStoreId());
@@ -150,7 +150,7 @@ class SslCommerzNotification extends AbstractSslCommerz
     }
 
     # FUNCTION TO CHECK HASH VALUE
-    protected function SSLCOMMERZ_hash_varify($store_passwd = "", $post_data)
+    protected function SSLCOMMERZ_hash_verify($post_data, $store_passwd = "")
     {
         if (isset($post_data) && isset($post_data['verify_sign']) && isset($post_data['verify_key'])) {
             # NEW ARRAY DECLARED TO TAKE VALUE OF ALL POST
