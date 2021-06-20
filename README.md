@@ -30,6 +30,8 @@ __License:__ GPLv2 or later
 
 Now, we have already copied the core library files. Let's do copy some other helpers files that is provided to understand the integration process. The other files are not related to core library. 
 
+* __Optional:__ If you later encounter issues with session destroying after redirect, you can set ```'same_site' => null,``` in your `config/session.php` file.
+
 * __Step 4:__ Add `STORE_ID` and `STORE_PASSWORD` values on your project's `.env` file. You can register for a store at [https://developer.sslcommerz.com/registration/](https://developer.sslcommerz.com/registration/)
 
 * __Step 5:__ Copy the `SslCommerzPaymentController` into your project's `Controllers` folder.
