@@ -99,7 +99,7 @@ abstract class AbstractSslCommerz implements SslCommerzInterface
                     $response = json_encode(['status' => 'success', 'data' => $sslcz['GatewayPageURL'], 'logo' => $sslcz['storeLogo']]);
                 }
             } else {
-                $response = json_encode(['status' => 'fail', 'data' => null, 'message' => "JSON Data parsing error!"]);
+                $response = json_encode(['status' => 'fail', 'data' => null, 'message' => $sslcz['failedreason']]);
             }
 
             if ($pattern == 'json') {
