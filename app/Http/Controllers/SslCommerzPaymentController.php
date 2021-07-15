@@ -200,7 +200,7 @@ class SslCommerzPaymentController extends Controller
             }
         } else if ($order_detials->status == 'Processing' || $order_detials->status == 'Complete') {
             /*
-             That means through IPN Order status already updated. Now you can just show the customer that transaction is completed. No need to udate database.
+             That means through IPN Order status already updated. Now you can just show the customer that transaction is completed. No need to update database.
              */
             echo "Transaction is successfully Completed";
         } else {
