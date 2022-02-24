@@ -1,5 +1,9 @@
 ### SSLCommerz - Laravel Library
 
+```
+For any technical support, please email at <integration@sslcommerz.com>
+```
+
 __Tags:__ Payment Gateway, SSLCommerz, IPN
 
 __Requires:__  Laravel >= 5.6 and MySQL
@@ -102,9 +106,7 @@ Now, let's go to the main integration part.
 
 
 ### Contributors
-
->Prabal Mallick
-
 > Md. Rakibul Islam
 
-> integration@sslcommerz.com
+> Prabal Mallick
+
