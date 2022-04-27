@@ -49,12 +49,19 @@ class SslCommerzNotification extends AbstractSslCommerz
             $post_data['store_id'] = $this->getStoreId();
             $post_data['store_pass'] = $this->getStorePassword();
 
-            if ($this->SSLCOMMERZ_hash_verify($post_data, $this->getStorePassword())) {
-
-                $val_id = urlencode($post_data['val_id']);
+            if ($this->SSLCOMMERZ_hash_varify($this->getStorePassword(), $post_data)) {
+                
                 $store_id = urlencode($this->getStoreId());
                 $store_passwd = urlencode($this->getStorePassword());
-                $requested_url = ($this->config['apiDomain'] . $this->config['apiUrl']['order_validate'] . "?val_id=" . $val_id . "&store_id=" . $store_id . "&store_passwd=" . $store_passwd . "&v=1&format=json");
+                $useAlternateProcess = false;
+                //Checking For Val ID Existence
+                if (!isset($post_data['val_id'])) {
+                    $alternate_url = ($this->config['apiDomain'] . $this->config['apiUrl']['transaction_status'] . "?tran_id=" . $post_data['tran_id'] . "&store_id=" . $store_id . "&store_passwd=" . $store_passwd . "&v=1&format=json");
+                    $useAlternateProcess = true;
+                }
+
+                $val_id = $useAlternateProcess ? "" : urlencode($post_data['val_id']);
+                $requested_url = $useAlternateProcess && $alternate_url ? $alternate_url : ($this->config['apiDomain'] . $this->config['apiUrl']['order_validate'] . "?val_id=" . $val_id . "&store_id=" . $store_id . "&store_passwd=" . $store_passwd . "&v=1&format=json");
 
                 $handle = curl_init();
                 curl_setopt($handle, CURLOPT_URL, $requested_url);
@@ -81,6 +88,8 @@ class SslCommerzNotification extends AbstractSslCommerz
 
                     # TO CONVERT AS OBJECT
                     $result = json_decode($result);
+                    $apiConnect = $result->APIConnect;
+                    $result = ($useAlternateProcess && $result->element[0]) ? $result->element[0]: $result;
                     $this->sslc_data = $result;
 
                     # TRANSACTION INFO
@@ -103,8 +112,8 @@ class SslCommerzNotification extends AbstractSslCommerz
                     $card_issuer_country_code = $result->card_issuer_country_code;
 
                     # API AUTHENTICATION
-                    $APIConnect = $result->APIConnect;
-                    $validated_on = $result->validated_on;
+                    $APIConnect = $apiConnect;
+                    $validated_on = $result->validated_on ?? date('Y-m-d H:i:s');
                     $gw_version = $result->gw_version;
 
                     # GIVE SERVICE
