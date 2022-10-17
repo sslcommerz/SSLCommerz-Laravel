@@ -9,6 +9,7 @@ class SslCommerzNotification extends AbstractSslCommerz
     private $successUrl;
     private $cancelUrl;
     private $failedUrl;
+	private $ipnUrl;
     private $error;
 
     /**
@@ -259,8 +260,15 @@ class SslCommerzNotification extends AbstractSslCommerz
         return $this->cancelUrl;
     }
 
-    public function setParams($requestData)
-    {
+	protected function setIPNUrl() {
+		$this->ipnUrl = url('/') . $this->config['ipn_url'];
+	}
+
+	protected function getIPNUrl() {
+		return $this->ipnUrl;
+	}
+
+	public function setParams($requestData) {
         ##  Integration Required Parameters
         $this->setRequiredInfo($requestData);
 
@@ -296,6 +304,7 @@ class SslCommerzNotification extends AbstractSslCommerz
         $this->setSuccessUrl();
         $this->setFailedUrl();
         $this->setCancelUrl();
+		$this->setIPNUrl();
 
         $this->data['success_url'] = $this->getSuccessUrl(); // string (255)	Mandatory - It is the callback URL of your website where user will redirect after successful payment (Length: 255)
         $this->data['fail_url'] = $this->getFailedUrl(); // string (255)	Mandatory - It is the callback URL of your website where user will redirect after any failure occure during payment (Length: 255)
@@ -308,8 +317,8 @@ class SslCommerzNotification extends AbstractSslCommerz
          * Type: string (255)
          * Important! Not mandatory, however better to use to avoid missing any payment notification - It is the Instant Payment Notification (IPN) URL of your website where SSLCOMMERZ will send the transaction's status (Length: 255).
          * The data will be communicated as SSLCOMMERZ Server to your Server. So, customer session will not work.
-         * */
-        $this->data['ipn_url'] = (isset($info['ipn_url'])) ? $info['ipn_url'] : null;
+		*/
+		$this->data['ipn_url'] = $this->getIPNUrl();
 
         /*
          * Type: string (30)
