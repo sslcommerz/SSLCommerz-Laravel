@@ -3,7 +3,7 @@
 // SSLCommerz configuration
 
 return [
-    'projectPath' => env('PROJECT_PATH'),
+    'projectPath' => env('APP_URL'),
     // For Sandbox, use "https://sandbox.sslcommerz.com"
     // For Live, use "https://securepay.sslcommerz.com"
     'apiDomain' => env("API_DOMAIN_URL", "https://sandbox.sslcommerz.com"),
