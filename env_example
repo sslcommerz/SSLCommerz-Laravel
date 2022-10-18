@@ -1,0 +1,3 @@
+SSLCZ_STORE_ID=<your store id>
+SSLCZ_STORE_PASSWORD=<your store password>
+SSLCZ_TESTMODE=true
