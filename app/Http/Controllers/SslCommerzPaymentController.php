@@ -170,11 +170,11 @@ class SslCommerzPaymentController extends Controller
         $sslc = new SslCommerzNotification();
 
         #Check order status in order tabel against the transaction id or order id.
-        $order_detials = DB::table('orders')
+        $order_details = DB::table('orders')
             ->where('transaction_id', $tran_id)
             ->select('transaction_id', 'status', 'currency', 'amount')->first();
 
-        if ($order_detials->status == 'Pending') {
+        if ($order_details->status == 'Pending') {
             $validation = $sslc->orderValidate($request->all(), $tran_id, $amount, $currency);
 
             if ($validation) {
@@ -189,7 +189,7 @@ class SslCommerzPaymentController extends Controller
 
                 echo "<br >Transaction is successfully Completed";
             }
-        } else if ($order_detials->status == 'Processing' || $order_detials->status == 'Complete') {
+        } else if ($order_details->status == 'Processing' || $order_details->status == 'Complete') {
             /*
              That means through IPN Order status already updated. Now you can just show the customer that transaction is completed. No need to udate database.
              */
@@ -206,16 +206,16 @@ class SslCommerzPaymentController extends Controller
     {
         $tran_id = $request->input('tran_id');
 
-        $order_detials = DB::table('orders')
+        $order_details = DB::table('orders')
             ->where('transaction_id', $tran_id)
             ->select('transaction_id', 'status', 'currency', 'amount')->first();
 
-        if ($order_detials->status == 'Pending') {
+        if ($order_details->status == 'Pending') {
             $update_product = DB::table('orders')
                 ->where('transaction_id', $tran_id)
                 ->update(['status' => 'Failed']);
             echo "Transaction is Falied";
-        } else if ($order_detials->status == 'Processing' || $order_detials->status == 'Complete') {
+        } else if ($order_details->status == 'Processing' || $order_details->status == 'Complete') {
             echo "Transaction is already Successful";
         } else {
             echo "Transaction is Invalid";
@@ -227,16 +227,16 @@ class SslCommerzPaymentController extends Controller
     {
         $tran_id = $request->input('tran_id');
 
-        $order_detials = DB::table('orders')
+        $order_details = DB::table('orders')
             ->where('transaction_id', $tran_id)
             ->select('transaction_id', 'status', 'currency', 'amount')->first();
 
-        if ($order_detials->status == 'Pending') {
+        if ($order_details->status == 'Pending') {
             $update_product = DB::table('orders')
                 ->where('transaction_id', $tran_id)
                 ->update(['status' => 'Canceled']);
             echo "Transaction is Cancel";
-        } else if ($order_detials->status == 'Processing' || $order_detials->status == 'Complete') {
+        } else if ($order_details->status == 'Processing' || $order_details->status == 'Complete') {
             echo "Transaction is already Successful";
         } else {
             echo "Transaction is Invalid";
