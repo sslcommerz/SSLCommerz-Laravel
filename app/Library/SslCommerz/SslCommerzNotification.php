@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Library\SslCommerz;
 
 class SslCommerzNotification extends AbstractSslCommerz
@@ -9,7 +10,7 @@ class SslCommerzNotification extends AbstractSslCommerz
     private $successUrl;
     private $cancelUrl;
     private $failedUrl;
-	private $ipnUrl;
+    private $ipnUrl;
     private $error;
 
     /**
@@ -31,7 +32,6 @@ class SslCommerzNotification extends AbstractSslCommerz
         }
 
         return $this->validate($trx_id, $amount, $currency, $post_data);
-
     }
 
 
@@ -148,9 +148,9 @@ class SslCommerzNotification extends AbstractSslCommerz
             $new_data = array();
             if (!empty($pre_define_key)) {
                 foreach ($pre_define_key as $value) {
-//                    if (isset($post_data[$value])) {
-                        $new_data[$value] = ($post_data[$value]);
-//                    }
+                    //                    if (isset($post_data[$value])) {
+                    $new_data[$value] = ($post_data[$value]);
+                    //                    }
                 }
             }
             # ADD MD5 OF STORE PASSWORD
@@ -168,7 +168,6 @@ class SslCommerzNotification extends AbstractSslCommerz
             if (md5($hash_string) == $post_data['verify_sign']) {
 
                 return true;
-
             } else {
                 $this->error = "Verification signature not matched";
                 return false;
@@ -223,8 +222,9 @@ class SslCommerzNotification extends AbstractSslCommerz
         }
     }
 
-	protected function setSuccessUrl() {
-		$this->successUrl = env('APP_URL') . $this->config['success_url'];
+    protected function setSuccessUrl()
+    {
+        $this->successUrl = rtrim(env('APP_URL'), '/') . $this->config['success_url'];
     }
 
     protected function getSuccessUrl()
@@ -232,8 +232,9 @@ class SslCommerzNotification extends AbstractSslCommerz
         return $this->successUrl;
     }
 
-	protected function setFailedUrl() {
-		$this->failedUrl = env('APP_URL') . $this->config['failed_url'];
+    protected function setFailedUrl()
+    {
+        $this->failedUrl = rtrim(env('APP_URL'), '/') . $this->config['failed_url'];
     }
 
     protected function getFailedUrl()
@@ -241,8 +242,9 @@ class SslCommerzNotification extends AbstractSslCommerz
         return $this->failedUrl;
     }
 
-	protected function setCancelUrl() {
-		$this->cancelUrl = env('APP_URL') . $this->config['cancel_url'];
+    protected function setCancelUrl()
+    {
+        $this->cancelUrl = rtrim(env('APP_URL'), '/') . $this->config['cancel_url'];
     }
 
     protected function getCancelUrl()
@@ -250,15 +252,18 @@ class SslCommerzNotification extends AbstractSslCommerz
         return $this->cancelUrl;
     }
 
-	protected function setIPNUrl() {
-		$this->ipnUrl = env('APP_URL') . $this->config['ipn_url'];
-	}
+    protected function setIPNUrl()
+    {
+        $this->ipnUrl = rtrim(env('APP_URL'), '/') . $this->config['ipn_url'];
+    }
 
-	protected function getIPNUrl() {
-		return $this->ipnUrl;
-	}
+    protected function getIPNUrl()
+    {
+        return $this->ipnUrl;
+    }
 
-	public function setParams($requestData) {
+    public function setParams($requestData)
+    {
         ##  Integration Required Parameters
         $this->setRequiredInfo($requestData);
 
@@ -294,7 +299,7 @@ class SslCommerzNotification extends AbstractSslCommerz
         $this->setSuccessUrl();
         $this->setFailedUrl();
         $this->setCancelUrl();
-		$this->setIPNUrl();
+        $this->setIPNUrl();
 
         $this->data['success_url'] = $this->getSuccessUrl(); // string (255)	Mandatory - It is the callback URL of your website where user will redirect after successful payment (Length: 255)
         $this->data['fail_url'] = $this->getFailedUrl(); // string (255)	Mandatory - It is the callback URL of your website where user will redirect after any failure occure during payment (Length: 255)
@@ -308,7 +313,7 @@ class SslCommerzNotification extends AbstractSslCommerz
          * Important! Not mandatory, however better to use to avoid missing any payment notification - It is the Instant Payment Notification (IPN) URL of your website where SSLCOMMERZ will send the transaction's status (Length: 255).
          * The data will be communicated as SSLCOMMERZ Server to your Server. So, customer session will not work.
 		*/
-		$this->data['ipn_url'] = $this->getIPNUrl();
+        $this->data['ipn_url'] = $this->getIPNUrl();
 
         /*
          * Type: string (30)
@@ -357,22 +362,22 @@ class SslCommerzNotification extends AbstractSslCommerz
         $this->data['emi_option'] = (isset($info['emi_option'])) ? $info['emi_option'] : null; // integer (1)	Mandatory - This is mandatory if transaction is EMI enabled and Value must be 1/0. Here, 1 means customer will get EMI facility for this transaction
         $this->data['emi_max_inst_option'] = (isset($info['emi_max_inst_option'])) ? $info['emi_max_inst_option'] : null; // integer (2)	Max instalment Option, Here customer will get 3,6, 9 instalment at gateway page
         $this->data['emi_selected_inst'] = (isset($info['emi_selected_inst'])) ? $info['emi_selected_inst'] : null; // integer (2)	Customer has selected from your Site, So no instalment option will be displayed at gateway page
-        $this->data['emi_allow_only'] = (isset($info['emi_allow_only'])) ? $info['emi_allow_only'] : 0; 
-        
+        $this->data['emi_allow_only'] = (isset($info['emi_allow_only'])) ? $info['emi_allow_only'] : 0;
+
         return $this->data;
     }
 
     public function setCustomerInfo(array $info)
     {
-        $this->data['cus_name'] = $info['cus_name']; // string (50)	Mandatory - Your customer name to address the customer in payment receipt email
-        $this->data['cus_email'] = $info['cus_email']; // string (50)	Mandatory - Valid email address of your customer to send payment receipt from SSLCommerz end
-        $this->data['cus_add1'] = $info['cus_add1']; // string (50)	Mandatory - Address of your customer. Not mandatory but useful if provided
-        $this->data['cus_add2'] = $info['cus_add2']; // string (50)	Address line 2 of your customer. Not mandatory but useful if provided
-        $this->data['cus_city'] = $info['cus_city']; // string (50)	Mandatory - City of your customer. Not mandatory but useful if provided
+        $this->data['cus_name'] = (isset($info['cus_name'])) ? $info['cus_name'] : null; // string (50)	Mandatory - Your customer name to address the customer in payment receipt email
+        $this->data['cus_email'] = (isset($info['cus_email'])) ? $info['cus_email'] : null; // string (50)	Mandatory - Valid email address of your customer to send payment receipt from SSLCommerz end
+        $this->data['cus_add1'] = (isset($info['cus_add1'])) ? $info['cus_add1'] : null; // string (50)	Mandatory - Address of your customer. Not mandatory but useful if provided
+        $this->data['cus_add2'] = (isset($info['cus_add2'])) ? $info['cus_add2'] : null; // string (50)	Address line 2 of your customer. Not mandatory but useful if provided
+        $this->data['cus_city'] = (isset($info['cus_city'])) ? $info['cus_city'] : null; // string (50)	Mandatory - City of your customer. Not mandatory but useful if provided
         $this->data['cus_state'] = (isset($info['cus_state'])) ? $info['cus_state'] : null; // string (50)	State of your customer. Not mandatory but useful if provided
-        $this->data['cus_postcode'] = $info['cus_postcode']; // string (30)	Mandatory - Postcode of your customer. Not mandatory but useful if provided
-        $this->data['cus_country'] = $info['cus_country']; // string (50)	Mandatory - Country of your customer. Not mandatory but useful if provided
-        $this->data['cus_phone'] = $info['cus_phone']; // string (20)	Mandatory - The phone/mobile number of your customer to contact if any issue arises
+        $this->data['cus_postcode'] = (isset($info['cus_postcode'])) ? $info['cus_postcode'] : null; // string (30)	Mandatory - Postcode of your customer. Not mandatory but useful if provided
+        $this->data['cus_country'] = (isset($info['cus_country'])) ? $info['cus_country'] : null; // string (50)	Mandatory - Country of your customer. Not mandatory but useful if provided
+        $this->data['cus_phone'] = (isset($info['cus_phone'])) ? $info['cus_phone'] : null; // string (20)	Mandatory - The phone/mobile number of your customer to contact if any issue arises
         $this->data['cus_fax'] = (isset($info['cus_fax'])) ? $info['cus_fax'] : null; // string (20)	Fax number of your customer. Not mandatory but useful if provided
 
         return $this->data;
@@ -381,12 +386,12 @@ class SslCommerzNotification extends AbstractSslCommerz
     public function setShipmentInfo(array $info)
     {
 
-        $this->data['shipping_method'] = $info['shipping_method']; // string (50)	Mandatory - Shipping method of the order. Example: YES or NO or Courier
+        $this->data['shipping_method'] = isset($info['shipping_method']) ? $info['shipping_method'] : null; // string (50)	Mandatory - Shipping method of the order. Example: YES or NO or Courier
         $this->data['num_of_item'] = isset($info['num_of_item']) ? $info['num_of_item'] : 1; // integer (1)	Mandatory - No of product will be shipped. Example: 1 or 2 or etc
-        $this->data['ship_name'] = $info['ship_name']; // string (50)	Mandatory, if shipping_method is YES - Shipping Address of your order. Not mandatory but useful if provided
-        $this->data['ship_add1'] = $info['ship_add1']; // string (50)	Mandatory, if shipping_method is YES - Additional Shipping Address of your order. Not mandatory but useful if provided
+        $this->data['ship_name'] = isset($info['ship_name']) ? $info['ship_name'] : null; // string (50)	Mandatory, if shipping_method is YES - Shipping Address of your order. Not mandatory but useful if provided
+        $this->data['ship_add1'] = isset($info['ship_add1']) ? $info['ship_add1'] : null; // string (50)	Mandatory, if shipping_method is YES - Additional Shipping Address of your order. Not mandatory but useful if provided
         $this->data['ship_add2'] = (isset($info['ship_add2'])) ? $info['ship_add2'] : null; // string (50)	Additional Shipping Address of your order. Not mandatory but useful if provided
-        $this->data['ship_city'] = $info['ship_city']; // string (50)	Mandatory, if shipping_method is YES - Shipping city of your order. Not mandatory but useful if provided
+        $this->data['ship_city'] = isset($info['ship_city']) ? $info['ship_city'] : null; // string (50)	Mandatory, if shipping_method is YES - Shipping city of your order. Not mandatory but useful if provided
         $this->data['ship_state'] = (isset($info['ship_state'])) ? $info['ship_state'] : null; // string (50)	Shipping state of your order. Not mandatory but useful if provided
         $this->data['ship_postcode'] = (isset($info['ship_postcode'])) ? $info['ship_postcode'] : null; // string (50)	Mandatory, if shipping_method is YES - Shipping postcode of your order. Not mandatory but useful if provided
         $this->data['ship_country'] = (isset($info['ship_country'])) ? $info['ship_country'] : null; // string (50)	Mandatory, if shipping_method is YES - Shipping country of your order. Not mandatory but useful if provided
