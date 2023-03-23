@@ -169,7 +169,7 @@ class SslCommerzPaymentController extends Controller
 
         $sslc = new SslCommerzNotification();
 
-        #Check order status in order tabel against the transaction id or order id.
+        #Check order status in order table against the transaction id or order id.
         $order_details = DB::table('orders')
             ->where('transaction_id', $tran_id)
             ->select('transaction_id', 'status', 'currency', 'amount')->first();
@@ -214,7 +214,7 @@ class SslCommerzPaymentController extends Controller
             $update_product = DB::table('orders')
                 ->where('transaction_id', $tran_id)
                 ->update(['status' => 'Failed']);
-            echo "Transaction is Falied";
+            echo "Transaction is Failed";
         } else if ($order_details->status == 'Processing' || $order_details->status == 'Complete') {
             echo "Transaction is already Successful";
         } else {
