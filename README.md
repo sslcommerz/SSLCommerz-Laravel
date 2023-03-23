@@ -68,7 +68,7 @@ We have also provided some example codes which can help you understand the proce
         endpoint="/pay-via-ajax"> Pay Now
 </button>
 ```
-* Populate postdata obj as required -
+* Populate Post data obj as required -
 
 ```
 <script>
