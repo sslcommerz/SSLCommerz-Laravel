@@ -38,7 +38,7 @@ protected $except = [
     '/success',
     '/cancel',
     '/fail',
-    '/ipn'
+    '/ipn',
     '/pay-via-ajax', // only required to run example codes. Please see bellow.
 ];
 ```
