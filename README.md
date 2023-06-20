@@ -22,16 +22,12 @@ GPLv2 or later
 
 * __Step 3:__ Copy the `config/sslcommerz.php` file into your project's `config/` folder.
 
-```
-If you later encounter issues with session destroying after redirect, you can set 'same_site' => 'none' in your `config/session.php` file.
-```
-
 * __Step 4:__ Copy and put 3 key-value pairs from `env_example` to your `.env` file. 
 
 For development purposes, you can obtain sandbox 'Store ID' and 'Store Password' by registering at [https://developer.sslcommerz.com/registration/](https://developer.sslcommerz.com/registration/)
 
 
-* __Step 5:__ Add exceptions for `VerifyCsrfToken` middleware accordingly.
+* __Step 5:__ Add exceptions for `VerifyCsrfToken` middleware accordingly (this is for our example code, **use your actual routes**).
 
 ```php
 protected $except = [
@@ -43,16 +39,16 @@ protected $except = [
 ];
 ```
 
-We have also provided some example codes which can help you understand the process. Developer's discretion is needed. Following steps are not mandatory.
+* __Optional:__ We have also provided some example codes which can help you understand the process. **Developer's discretion is needed. Following steps are not mandatory.**
 
-* Copy `SslCommerzPaymentController` into your project's `Controllers` folder.
+> Copy `SslCommerzPaymentController` into your project's `Controllers` folder.
 
-* Copy defined routes from `routes/web.php` into your project's route file.
+> Copy defined routes from `routes/web.php` into your project's route file.
 
-* Copy views from `resources/views/*.blade.php`.
+> Copy views from `resources/views/*.blade.php`.
 
 
-### Show sslcommerz gateway inside a popup
+### To Show sslcommerz gateway page inside a popup (optional)
 
 * We provide a simple solution to show sslcommerz gateway page inside popup. To integrate it, You need to have a `<button>` with following properties -
 
@@ -115,6 +111,20 @@ We have also provided some example codes which can help you understand the proce
     })(window, document);
 </script>
 ```
+
+
+### FAQ
+* Session is destroyed after redirecting to success/cancel/fail URL
+
+> This is a general Laravel issue, **unrelated to SSLCommerz**. You can try setting 'same_site' => 'none' in your `config/session.php` file.
+
+* I am getting an error saying "Store Credential Error Or Store is Deactive"
+
+> You have incorrect (or missing) configuration values in .env file. Check step 4.
+
+* I am not getting IPN in localhost / development machine.
+
+> You can't. IPN requires a publicly accessible webserver.
 
 
 ### Contributors
