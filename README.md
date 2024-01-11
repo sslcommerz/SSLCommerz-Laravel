@@ -34,7 +34,7 @@ protected $except = [
     '/success',
     '/cancel',
     '/fail',
-    '/ipn'
+    '/ipn',
     '/pay-via-ajax', // only required to run example codes. Please see bellow.
 ];
 ```
@@ -50,7 +50,7 @@ protected $except = [
 
 ### To Show sslcommerz gateway page inside a popup (optional)
 
-* We provide a simple solution to show sslcommerz gateway page inside popup. To integrate it, You need to have a `<button>` with following properties -
+* If you use blade templates, we provide a simple solution to show sslcommerz gateway page inside popup. To integrate it, You need to have a `<button>` with following properties in your blade file -
 
     * id="sslczPayBtn" 
     * endpoint=[your ajax route]
