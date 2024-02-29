@@ -64,7 +64,7 @@ protected $except = [
         endpoint="/pay-via-ajax"> Pay Now
 </button>
 ```
-* Populate postdata obj as required -
+* Populate Post data obj as required -
 
 ```
 <script>
