@@ -6,8 +6,8 @@ For any technical support, please email at integration@sslcommerz.com
 
 
 
-### Requirement
-Laravel v5.6 or later
+### Compatibility
+Supports Laravel v5.6 to v10.
 
 
 ### License
