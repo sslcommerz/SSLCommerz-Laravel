@@ -4,30 +4,27 @@
 For any technical support, please email at integration@sslcommerz.com
 ```
 
-
-
 ### Compatibility
+
 Supports Laravel v5.6 to v10.
 
-
 ### License
-GPLv2 or later
 
+GPLv2 or later
 
 ### Instructions:
 
-* __Step 1:__ Download and extract the library files.
+- **Step 1:** Download and extract the library files.
 
-* __Step 2:__ Copy the `Library` folder and put it in the laravel project's `app/` directory. If needed, then run `composer dump -o`.
+- **Step 2:** Copy the `Library` folder and put it in the laravel project's `app/` directory. If needed, then run `composer dump -o`.
 
-* __Step 3:__ Copy the `config/sslcommerz.php` file into your project's `config/` folder.
+- **Step 3:** Copy the `config/sslcommerz.php` file into your project's `config/` folder.
 
-* __Step 4:__ Copy and put 3 key-value pairs from `env_example` to your `.env` file. 
+- **Step 4:** Copy and put 3 key-value pairs from `env_example` to your `.env` file.
 
 For development purposes, you can obtain sandbox 'Store ID' and 'Store Password' by registering at [https://developer.sslcommerz.com/registration/](https://developer.sslcommerz.com/registration/)
 
-
-* __Step 5:__ Add exceptions for `VerifyCsrfToken` middleware accordingly (this is for our example code, **use your actual routes**).
+- **Step 5:** Add exceptions for `VerifyCsrfToken` middleware accordingly (this is for our example code, **use your actual routes**).
 
 ```php
 protected $except = [
@@ -39,7 +36,17 @@ protected $except = [
 ];
 ```
 
-* __Optional:__ We have also provided some example codes which can help you understand the process. **Developer's discretion is needed. Following steps are not mandatory.**
+> In Laravel 11, there is no middleware folder by default. Therefore, it might not work by simply copy-pasting. You can make changes in `bootstrap/app.php` with the following code:
+
+```php
+ ->withMiddleware(function (Middleware $middleware) {
+       $middleware->validateCsrfTokens(except: [
+           '/pay-via-ajax', '/success', '/cancel', '/fail', '/ipn'
+       ]);
+   })
+```
+
+- **Optional:** We have also provided some example codes which can help you understand the process. **Developer's discretion is needed. Following steps are not mandatory.**
 
 > Copy `SslCommerzPaymentController` into your project's `Controllers` folder.
 
@@ -47,14 +54,13 @@ protected $except = [
 
 > Copy views from `resources/views/*.blade.php`.
 
-
 ### To Show sslcommerz gateway page inside a popup (optional)
 
-* If you use blade templates, we provide a simple solution to show sslcommerz gateway page inside popup. To integrate it, You need to have a `<button>` with following properties in your blade file -
+- If you use blade templates, we provide a simple solution to show sslcommerz gateway page inside popup. To integrate it, You need to have a `<button>` with following properties in your blade file -
 
-    * id="sslczPayBtn" 
-    * endpoint=[your ajax route]
-    * postdata= [you need to populate a js object with required form fields]
+  - id="sslczPayBtn"
+  - endpoint=[your ajax route]
+  - postdata= [you need to populate a js object with required form fields]
 
 ```
 <button id="sslczPayBtn"
@@ -64,7 +70,8 @@ protected $except = [
         endpoint="/pay-via-ajax"> Pay Now
 </button>
 ```
-* Populate postdata obj as required -
+
+- Populate postdata obj as required -
 
 ```
 <script>
@@ -74,12 +81,12 @@ protected $except = [
     obj.cus_email = $('#email').val();
     obj.cus_addr1 = $('#address').val();
     obj.amount = $('#total_amount').val();
-    
+
     $('#sslczPayBtn').prop('postdata', obj);
 </script>
 ```
 
-* Add following script -
+- Add following script -
 
 ##### For Sandbox
 
@@ -96,6 +103,7 @@ protected $except = [
     })(window, document);
 </script>
 ```
+
 ##### For Live
 
 ```
@@ -106,29 +114,58 @@ protected $except = [
             script.src = "https://seamless-epay.sslcommerz.com/embed.min.js?" + Math.random().toString(36).substring(7);
             tag.parentNode.insertBefore(script, tag);
         };
-    
+
         window.addEventListener ? window.addEventListener("load", loader, false) : window.attachEvent("onload", loader);
     })(window, document);
 </script>
 ```
 
-
 ### FAQ
-* Session is destroyed after redirecting to success/cancel/fail URL
 
-> This is a general Laravel issue, **unrelated to SSLCommerz**. You can try setting 'same_site' => 'none' in your `config/session.php` file.
+- Session is destroyed after redirecting to success/cancel/fail URL
 
-* I am getting an error saying "Store Credential Error Or Store is Deactive"
+> This is a general Laravel issue, **unrelated to SSLCommerz**. You can try setting
+
+```php
+'same_site' => env('SESSION_SAME_SITE', 'none')
+```
+
+in your `config/session.php` file.
+
+> or try
+
+```php
+'same_site' => env('SESSION_SAME_SITE', null)
+```
+
+-Redirecting to success/cancel/fail URL is not working
+
+> You can try setting in your `.env` file
+
+```php
+ APP_URL=http://localhost:8000
+```
+
+> or
+
+```php
+APP_URL=http://127.0.0.1:8000
+```
+
+- I am getting an error saying "Store Credential Error Or Store is Deactive"
 
 > You have incorrect (or missing) configuration values in .env file. Check step 4.
 
-* I am not getting IPN in localhost / development machine.
+- I am not getting IPN in localhost / development machine.
 
 > You can't. IPN requires a publicly accessible webserver.
 
-
 ### Contributors
+
 > Md. Rakibul Islam
 
 > Prabal Mallick
 
+```
+
+```
