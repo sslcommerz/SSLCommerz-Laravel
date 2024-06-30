@@ -116,7 +116,7 @@ protected $except = [
 ### FAQ
 * Session is destroyed after redirecting to success/cancel/fail URL
 
-> This is a general Laravel issue, **unrelated to SSLCommerz**. You can try setting 'same_site' => 'none' in your `config/session.php` file.
+> This is a general Laravel issue, **unrelated to SSLCommerz**. You can try setting `'same_site' => 'none'` in your `config/session.php` file. Or you can create a middleware you can set `'same_site' => 'none'` using `Config::set('session.same_site', 'none');` for the SSLCommerz urls.
 
 * I am getting an error saying "Store Credential Error Or Store is Deactive"
 
