@@ -73,7 +73,6 @@
         </div>
         <div class="col-md-8 order-md-1">
             <h4 class="mb-3">Billing address</h4>
-            <form method="POST" class="needs-validation" novalidate>
                 <div class="row">
                     <div class="col-md-12 mb-3">
                         <label for="firstName">Full name</label>
@@ -169,7 +168,6 @@
                         order="If you already have the transaction generated for current order"
                         endpoint="{{ url('/pay-via-ajax') }}"> Pay Now
                 </button>
-            </form>
         </div>
     </div>
 
@@ -196,11 +194,11 @@
 <!-- If you want to use the popup integration, -->
 <script>
     var obj = {};
-    obj.cus_name = $('#customer_name').val();
-    obj.cus_phone = $('#mobile').val();
-    obj.cus_email = $('#email').val();
-    obj.cus_addr1 = $('#address').val();
-    obj.amount = $('#total_amount').val();
+    // If you want to pass some value from frontend, you can do like this, but be aware, this value can be modified by anyone, so it's not secure to pass total_amount, store_passwd etc from frontend.
+    // obj.cus_name = $('#customer_name').val();
+    // obj.cus_phone = $('#mobile').val();
+    // obj.cus_email = $('#email').val();
+    // obj.cus_addr1 = $('#address').val();
 
     $('#sslczPayBtn').prop('postdata', obj);
 
